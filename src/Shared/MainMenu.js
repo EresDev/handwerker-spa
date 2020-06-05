@@ -8,9 +8,9 @@ export default class MainMenu extends React.Component{
               <div className="inner">
                 <a href="index.html" className="logo">introspect</a>
                 <nav id="nav">
-                  <a href="index.html">Home</a>
-                  <a href="generic.html">Generic</a>
-                  <a href="elements.html">Elements</a>
+                  <a href="/">Home</a>
+                  <a href="/jobs">Jobs</a>
+                  <a href="/login">Login</a>
                 </nav>
               </div>
             </header>
@@ -18,5 +18,4 @@ export default class MainMenu extends React.Component{
         </React.Fragment>
         );
     }
-
 }
