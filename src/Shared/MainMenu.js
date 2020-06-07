@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 
 export default class MainMenu extends React.Component{
     render() {
@@ -6,11 +10,10 @@ export default class MainMenu extends React.Component{
         <React.Fragment>
             <header id="header">
               <div className="inner">
-                <a href="index.html" className="logo">introspect</a>
+              <Link to="/" className="logo">Handwerker</Link>
                 <nav id="nav">
-                  <a href="/">Home</a>
-                  <a href="/jobs">Jobs</a>
-                  <a href="/login">Login</a>
+                  <Link to="/">Home</Link>
+                  <Link to="/login">Login</Link>
                 </nav>
               </div>
             </header>

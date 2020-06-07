@@ -28,7 +28,7 @@ test("Main menu html is correct", () => {
     });
 
     const expectedHtml =
-        `<header id="header">
+        `<header id="header"> 
             <div class="inner">
                 <a href="index.html" class="logo">introspect</a>
                 <nav id="nav">
@@ -47,7 +47,7 @@ test("Main menu html is correct", () => {
         expect(matcherResult.pass).toBeTruthy();
     } catch (e) {
         throw new Error(
-            "Received HTML:\n" + container.innerHTML +
+            "Received HTML:\n" + matcherResult.receivedWithCompresssedWhitespace +
             "\n\nExpected HTML:\n" + matcherResult.expectedWithCompresssedWhitespace,
             e
         );

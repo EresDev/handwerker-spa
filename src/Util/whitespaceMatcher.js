@@ -1,8 +1,10 @@
-import { replace, map, equals } from 'ramda';
+import { map, equals } from 'ramda';
 import { matcherHint, printReceived, printExpected } from 'jest-matcher-utils';
 import diff from 'jest-diff';
 
-const replaceWhitespace = replace(/\s+/g, ``);
+const replaceWhitespace = (str) => {
+    return str.replace(/\s+/g, ` `).replace(/> /g, `>`);
+};
 const compressWhitespace = map(replaceWhitespace);
 
 const name = `toEqualWithCompressedWhitespace`;

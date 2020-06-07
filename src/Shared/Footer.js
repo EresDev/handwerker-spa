@@ -22,7 +22,7 @@ export default class Footer extends React.Component{
                         <textarea name="message" id="message" rows={6} defaultValue={""} />
                     </div>
                     <ul className="actions">
-                        <li><input type="submit" defaultValue="Send Message" className="alt" /></li>
+                        <li><input type="submit" className="alt" value="Send Message" /></li>
                     </ul>
                 </form>
                 <div className="copyright">
