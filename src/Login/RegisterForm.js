@@ -1,4 +1,5 @@
 import React from 'react';
+import { Translation } from 'react-i18next';
 
 export default class RegisterForm extends React.Component {
     constructor(props) {
@@ -8,7 +9,6 @@ export default class RegisterForm extends React.Component {
             password: '',
             confirm_password: ''
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -42,41 +42,47 @@ export default class RegisterForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div id="register_form">
-                    <div className="field">
-                        <label htmlFor="email" className="required">Email</label>
-                        <input type="email" id="email" required="required"
-                               value={this.state.email}
-                               onChange={this.handleChange}
+                <form onSubmit={this.handleSubmit}>
+                    <div id="register_form">
+                        <div className="field">
+                            <label htmlFor="email" className="required">
+                                <Translation>
+                                {
+                                    t => t('Email')
+                                }
+                                </Translation>
+                            </label>
+                            <input type="email" id="email" required="required"
+                                   value={this.state.email}
+                                   onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="field">
+                            <label htmlFor="password"
+                                   className="required">Password</label><input
+                            type="password" id="password"
+                            required="required" minLength={6} maxLength={4096}
+                            value={this.state.password}
+                            onChange={this.handleChange}
                         />
+                        </div>
+                        <div className="field"><label htmlFor="confirm_password"
+                                                      className="required">Confirm Password</label><input
+                            type="password" id="confirm_password"
+                            required="required" minLength={6}
+                            maxLength={4096}
+                            value={this.state.confirm_password}
+                            onChange={this.handleChange}
+                        /></div>
+                        <div>
+                            <ul className="actions">
+                                <li>
+                                    <button type="submit" className="alt">Register</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div className="field">
-                        <label htmlFor="password"
-                               className="required">Password</label><input
-                        type="password" id="password"
-                        required="required" minLength={6} maxLength={4096}
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-                    </div>
-                    <div className="field"><label htmlFor="confirm_password"
-                                                  className="required">Confirm Password</label><input
-                        type="password" id="confirm_password"
-                        required="required" minLength={6}
-                        maxLength={4096}
-                        value={this.state.confirm_password}
-                        onChange={this.handleChange}
-                    /></div>
-                    <div>
-                        <ul className="actions">
-                            <li>
-                                <button type="submit" className="alt">Register</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </form>
+                </form>
         );
     }
 }
