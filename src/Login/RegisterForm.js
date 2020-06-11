@@ -10,7 +10,6 @@ export default class RegisterForm extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        //this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -22,7 +21,7 @@ export default class RegisterForm extends React.Component {
 
         this.setState(
             {[event.target.id]: event.target.value},
-            () => this.validatePassword(form)
+            () => { this.validatePassword(form) }
         );
     }
 
