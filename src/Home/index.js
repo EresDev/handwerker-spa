@@ -1,16 +1,19 @@
 import React from 'react';
+import {withTranslation} from "react-i18next";
 
-export default class extends React.Component{
+class Home extends React.Component{
     render() {
         return (
             <React.Fragment>
             {/* Banner */}
             <section id="banner">
                 <div className="inner">
-                    <h1>Introspect: <span>A free + fully responsive<br />
-                site template by TEMPLATED</span></h1>
+                    <h1>Handwerker: <span>{this.props.t("common:home.heading1")}<br />
+                    {this.props.t("common:home.heading2")}</span></h1>
                     <ul className="actions">
-                        <li><a href="#" className="button alt">Get Started</a></li>
+                        <li><a href="#" className="button alt">
+                            {this.props.t("common:home.getStarted")}
+                        </a></li>
                     </ul>
                 </div>
             </section>
@@ -97,5 +100,6 @@ export default class extends React.Component{
         </React.Fragment>
         );
     }
-
 }
+
+export default withTranslation()(Home);

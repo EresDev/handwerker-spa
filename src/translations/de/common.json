@@ -4,5 +4,15 @@
     "password": "Passwort",
     "confirmPassword": "Kennwort bestätigen",
     "register": "Registrieren"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Passwort",
+    "login": "Einloggen"
+  },
+  "home": {
+    "heading1": "eine kostenlose Jobbörse",
+    "heading2": "Handwerker in Ihrer Nähe zu finden.",
+    "getStarted": "Loslegen"
   }
 }

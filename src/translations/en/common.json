@@ -4,5 +4,15 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "register": "Register"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Login"
+  },
+  "home": {
+    "heading1": "a free job board",
+    "heading2": "to find craftsmen in your area.",
+    "getStarted": "Get Started"
   }
 }

@@ -11,7 +11,7 @@ class Login extends React.Component {
                     <article>
                         <div className="content">
                             <header>
-                                <h3>Login</h3>
+                                <h3>{this.props.t("common:login.login")}</h3>
                             </header>
                             <LoginForm />
                         </div>

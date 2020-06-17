@@ -43,7 +43,7 @@ export default class MainMenu extends React.Component{
                 <nav id="nav">
                   <Link to="/">Home</Link>
                   <Link to="/login">Login</Link>
-                  <a href="#" onClick={this.switchLocale}>Switch to {
+                  <a href="javascript:;" onClick={this.switchLocale}>Switch to {
                       this.toggleLocale(this.state.locale)
                   }</a>
                 </nav>

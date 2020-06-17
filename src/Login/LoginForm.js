@@ -1,6 +1,7 @@
 import React from 'react';
+import {withTranslation} from "react-i18next";
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +27,9 @@ export default class LoginForm extends React.Component {
                 <div id="login_form">
                     <div className="field">
                         <label htmlFor="email"
-                               className="required">Email</label>
+                               className="required">
+                            {this.props.t("common:login.email")}
+                        </label>
                         <input type="email"
                                id="email"
                                required="required"
@@ -36,7 +39,9 @@ export default class LoginForm extends React.Component {
                     </div>
                     <div className="field">
                         <label htmlFor="login_form_password"
-                               className="required">Password</label>
+                               className="required">
+                            {this.props.t("common:login.password")}
+                        </label>
                         <input type="password"
                                id="password"
                                value={this.state.password}
@@ -49,7 +54,9 @@ export default class LoginForm extends React.Component {
                     <div>
                         <ul className="actions">
                             <li>
-                                <button type="submit" className="alt">Login</button>
+                                <button type="submit" className="alt">
+                                    {this.props.t("common:login.login")}
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -58,3 +65,5 @@ export default class LoginForm extends React.Component {
         );
     }
 };
+
+export default withTranslation()(LoginForm);
