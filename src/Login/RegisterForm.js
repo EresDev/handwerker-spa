@@ -1,7 +1,7 @@
 import React from 'react';
-import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
-export default class RegisterForm extends React.Component {
+class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,11 +46,7 @@ export default class RegisterForm extends React.Component {
                     <div id="register_form">
                         <div className="field">
                             <label htmlFor="email" className="required">
-                                <Translation>
-                                {
-                                    t => t('Email')
-                                }
-                                </Translation>
+                                {this.props.t("common:register.email")}
                             </label>
                             <input type="email" id="email" required="required"
                                    value={this.state.email}
@@ -59,7 +55,9 @@ export default class RegisterForm extends React.Component {
                         </div>
                         <div className="field">
                             <label htmlFor="password"
-                                   className="required">Password</label><input
+                                   className="required">
+                                {this.props.t("common:register.password")}
+                            </label><input
                             type="password" id="password"
                             required="required" minLength={6} maxLength={4096}
                             value={this.state.password}
@@ -67,7 +65,9 @@ export default class RegisterForm extends React.Component {
                         />
                         </div>
                         <div className="field"><label htmlFor="confirm_password"
-                                                      className="required">Confirm Password</label><input
+                                                      className="required">
+                            {this.props.t("common:register.confirmPassword")}
+                        </label><input
                             type="password" id="confirm_password"
                             required="required" minLength={6}
                             maxLength={4096}
@@ -77,7 +77,9 @@ export default class RegisterForm extends React.Component {
                         <div>
                             <ul className="actions">
                                 <li>
-                                    <button type="submit" className="alt">Register</button>
+                                    <button type="submit" className="alt">
+                                        {this.props.t("common:register.register")}
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -86,3 +88,5 @@ export default class RegisterForm extends React.Component {
         );
     }
 }
+
+export default withTranslation()(RegisterForm);

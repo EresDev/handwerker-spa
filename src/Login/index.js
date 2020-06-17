@@ -1,8 +1,9 @@
 import React from 'react';
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import {withTranslation} from "react-i18next";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     render() {
         return (
             <section id="two" className="background">
@@ -18,7 +19,7 @@ export default class Login extends React.Component {
                     <article className="alt">
                         <div className="content">
                             <header>
-                                <h3>Register</h3>
+                                <h3>{this.props.t("common:register.register")}</h3>
                             </header>
                             <RegisterForm />
                         </div>
@@ -28,3 +29,5 @@ export default class Login extends React.Component {
         );
     }
 }
+
+export default withTranslation()(Login);
