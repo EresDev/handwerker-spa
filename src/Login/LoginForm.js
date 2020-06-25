@@ -16,9 +16,29 @@ class LoginForm extends React.Component {
         this.setState({[event.target.id]: event.target.value});
     }
 
-    handleSubmit(event) {
-        console.log(this.state);
+    async handleSubmit(event) {
         event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('email', this.state.email);
+        formData.append('password', this.state.password);
+
+        try {
+            const res = await fetch("https://handwerker.loc/login_check", {
+                method: "POST",
+                body: formData,
+                credentials: "include"
+            });
+            alert(res.status);
+
+            if (res.status == 204) {
+                console.log("DONE LOGIN");
+            } else {
+                alert(this.props.t("common:login.errorInvalidCredentials"));
+            }
+        } catch (e) {
+            alert(this.props.t("common:login.errorNetwork"));
+        }
     }
 
     render() {

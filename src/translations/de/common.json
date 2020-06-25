@@ -8,7 +8,9 @@
   "login": {
     "email": "Email",
     "password": "Passwort",
-    "login": "Einloggen"
+    "login": "Einloggen",
+    "errorInvalidCredentials": "Anmeldeinformationen sind ungültig. Versuch es noch einmal.",
+    "errorNetwork": "Es ist ein Netzwerkfehler aufgetreten. Versuch es noch einmal."
   },
   "home": {
     "heading1": "eine kostenlose Jobbörse",

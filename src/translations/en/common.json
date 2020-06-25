@@ -8,7 +8,9 @@
   "login": {
     "email": "Email",
     "password": "Password",
-    "login": "Login"
+    "login": "Login",
+    "errorInvalidCredentials": "Login credentials are not valid. Try again.",
+    "errorNetwork": "There was network error. Try again."
   },
   "home": {
     "heading1": "a free job board",
