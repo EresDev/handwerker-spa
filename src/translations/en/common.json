@@ -3,7 +3,9 @@
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "register": "Register"
+    "register": "Register",
+    "successMessage": "Your account has been created. You can login now.",
+    "errorNetwork": "There was network error. Try again."
   },
   "login": {
     "email": "Email",

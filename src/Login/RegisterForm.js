@@ -35,9 +35,36 @@ class RegisterForm extends React.Component {
         }
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         console.log(this.state);
         event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('email', this.state.email);
+        formData.append('password', this.state.password);
+
+        try {
+            const res = await fetch("https://handwerker.loc/user", {
+                method: "POST",
+                body: formData,
+                credentials: "include"
+            });
+            if (res.status == 201) {
+                alert(this.props.t("common:register.successMessage"));
+                this.setState({
+                    email: '',
+                    password: '',
+                    confirm_password: ''
+                });
+            } else {
+                const resBody = await res.json();
+                if (resBody.status == 'fail') {
+                    alert(JSON.stringify(resBody.data));
+                }
+            }
+        } catch (e) {
+            alert(this.props.t("common:register.errorNetwork"));
+        }
     }
 
     render() {
