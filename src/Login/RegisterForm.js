@@ -1,5 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
+import { backendUrl } from '../globals';
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -26,12 +27,12 @@ class RegisterForm extends React.Component {
     }
 
     validatePassword(form) {
-        const confirmPassword = form.querySelector("#confirm_password");
+        const confirmPassword = form.querySelector('#confirm_password');
 
         if (this.state.password !== this.state.confirm_password) {
-            confirmPassword.setCustomValidity("Password and confirm password are not same.");
+            confirmPassword.setCustomValidity('Password and confirm password are not same.');
         } else {
-            confirmPassword.setCustomValidity("");
+            confirmPassword.setCustomValidity('');
         }
     }
 
@@ -44,13 +45,13 @@ class RegisterForm extends React.Component {
         formData.append('password', this.state.password);
 
         try {
-            const res = await fetch("https://handwerker.loc/user", {
-                method: "POST",
+            const res = await fetch(backendUrl + '/user', {
+                method: 'POST',
                 body: formData,
-                credentials: "include"
+                credentials: 'include'
             });
             if (res.status == 201) {
-                alert(this.props.t("common:register.successMessage"));
+                alert(this.props.t('common:register.successMessage'));
                 this.setState({
                     email: '',
                     password: '',
@@ -63,7 +64,7 @@ class RegisterForm extends React.Component {
                 }
             }
         } catch (e) {
-            alert(this.props.t("common:register.errorNetwork"));
+            alert(this.props.t('common:register.errorNetwork'));
         }
     }
 
@@ -73,7 +74,7 @@ class RegisterForm extends React.Component {
                     <div id="register_form">
                         <div className="field">
                             <label htmlFor="email" className="required">
-                                {this.props.t("common:register.email")}
+                                {this.props.t('common:register.email')}
                             </label>
                             <input type="email" id="email" required="required"
                                    value={this.state.email}
@@ -83,9 +84,9 @@ class RegisterForm extends React.Component {
                         <div className="field">
                             <label htmlFor="password"
                                    className="required">
-                                {this.props.t("common:register.password")}
+                                {this.props.t('common:register.password')}
                             </label><input
-                            type="password" id="password"
+                            type='password' id="password"
                             required="required" minLength={6} maxLength={4096}
                             value={this.state.password}
                             onChange={this.handleChange}
@@ -93,7 +94,7 @@ class RegisterForm extends React.Component {
                         </div>
                         <div className="field"><label htmlFor="confirm_password"
                                                       className="required">
-                            {this.props.t("common:register.confirmPassword")}
+                            {this.props.t('common:register.confirmPassword')}
                         </label><input
                             type="password" id="confirm_password"
                             required="required" minLength={6}
@@ -105,7 +106,7 @@ class RegisterForm extends React.Component {
                             <ul className="actions">
                                 <li>
                                     <button type="submit" className="alt">
-                                        {this.props.t("common:register.register")}
+                                        {this.props.t('common:register.register')}
                                     </button>
                                 </li>
                             </ul>

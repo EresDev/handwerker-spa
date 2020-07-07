@@ -1,5 +1,6 @@
 import React from 'react';
-import {withTranslation} from "react-i18next";
+import {withTranslation} from 'react-i18next';
+import {backendUrl} from '../globals';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -24,20 +25,20 @@ class LoginForm extends React.Component {
         formData.append('password', this.state.password);
 
         try {
-            const res = await fetch("https://handwerker.loc/login_check", {
-                method: "POST",
+            const res = await fetch(backendUrl + '/login_check', {
+                method: 'POST',
                 body: formData,
-                credentials: "include"
+                credentials: 'include'
             });
             alert(res.status);
 
             if (res.status == 204) {
-                console.log("DONE LOGIN");
+                console.log('DONE LOGIN');
             } else {
-                alert(this.props.t("common:login.errorInvalidCredentials"));
+                alert(this.props.t('common:login.errorInvalidCredentials'));
             }
         } catch (e) {
-            alert(this.props.t("common:login.errorNetwork"));
+            alert(this.props.t('common:login.errorNetwork'));
         }
     }
 
@@ -48,7 +49,7 @@ class LoginForm extends React.Component {
                     <div className="field">
                         <label htmlFor="email"
                                className="required">
-                            {this.props.t("common:login.email")}
+                            {this.props.t('common:login.email')}
                         </label>
                         <input type="email"
                                id="email"
@@ -60,7 +61,7 @@ class LoginForm extends React.Component {
                     <div className="field">
                         <label htmlFor="login_form_password"
                                className="required">
-                            {this.props.t("common:login.password")}
+                            {this.props.t('common:login.password')}
                         </label>
                         <input type="password"
                                id="password"
@@ -75,7 +76,7 @@ class LoginForm extends React.Component {
                         <ul className="actions">
                             <li>
                                 <button type="submit" className="alt">
-                                    {this.props.t("common:login.login")}
+                                    {this.props.t('common:login.login')}
                                 </button>
                             </li>
                         </ul>
