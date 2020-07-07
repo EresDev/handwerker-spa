@@ -1,10 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import i18n from 'i18next';
-import {initReactI18next} from 'react-i18next';
+import { withTranslation, initReactI18next } from 'react-i18next';
 import Security from '../Util/Security';
 
-export default class MainMenu extends React.Component {
+export class MainMenu extends React.Component {
     constructor(props) {
         super(props);
         this.switchLocale = this.switchLocale.bind(this);
@@ -48,12 +48,12 @@ export default class MainMenu extends React.Component {
                     <div className="inner">
                         <Link to="/" className="logo">Handwerker</Link>
                         <nav id="nav">
-                            <Link to="/">Home</Link>
+                            <Link to="/">{this.props.t("common:menu.home")}</Link>
                             {this.security.isAuthenticated()
-                                ? <Link to="/login" onClick={this.logout}>Logout</Link>
-                                : <Link to="/login">Login</Link>
+                                ? <Link to="/login" onClick={this.logout}>{this.props.t("common:menu.logout")}</Link>
+                                : <Link to="/login">{this.props.t("common:menu.login")}</Link>
                             }
-                            <a href="#" onClick={this.switchLocale} title={'Switch to ' + this.toggleLocale(this.state.locale).toUpperCase() }>
+                            <a href="#" onClick={this.switchLocale} title={this.props.t('common:menu.switchTo') + ' ' + this.toggleLocale(this.state.locale).toUpperCase() }>
                                 <img src={this.state.locale == 'en' ? "/images/de.png" : "/images/en.png"} className="locale"/>
                             </a>
                         </nav>
@@ -64,3 +64,5 @@ export default class MainMenu extends React.Component {
         );
     }
 }
+
+export default withTranslation()(MainMenu);

@@ -22,5 +22,11 @@
   "account": {
     "heading": "Welcome to your account.",
     "comingSoon": "You will be able to modify your personal information on this page soon."
+  },
+  "menu": {
+    "home": "Home",
+    "login": "Login",
+    "logout": "Logout",
+    "switchTo": "Switch to"
   }
 }

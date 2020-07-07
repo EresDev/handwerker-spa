@@ -22,5 +22,11 @@
   "account": {
     "heading": "Willkommen in Ihrem Konto.",
     "comingSoon": "In Kürze können Sie Ihre persönlichen Daten auf dieser Seite ändern."
+  },
+  "menu": {
+    "home": "Startseite",
+    "login": "Einloggen",
+    "logout": "Ausloggen",
+    "switchTo": "Wechseln Sie zu"
   }
 }
