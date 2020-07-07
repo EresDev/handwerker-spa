@@ -53,9 +53,9 @@ export default class MainMenu extends React.Component {
                                 ? <Link to="/login" onClick={this.logout}>Logout</Link>
                                 : <Link to="/login">Login</Link>
                             }
-                            <a href="#" onClick={this.switchLocale}>Switch to {
-                                this.toggleLocale(this.state.locale)
-                            }</a>
+                            <a href="#" onClick={this.switchLocale} title={'Switch to ' + this.toggleLocale(this.state.locale).toUpperCase() }>
+                                <img src={this.state.locale == 'en' ? "/images/de.png" : "/images/en.png"} className="locale"/>
+                            </a>
                         </nav>
                     </div>
                 </header>
