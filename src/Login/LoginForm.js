@@ -1,5 +1,6 @@
 import React from 'react';
-import {withTranslation} from 'react-i18next';
+import { withTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 import {backendUrl} from '../globals';
 
 class LoginForm extends React.Component {
@@ -30,13 +31,13 @@ class LoginForm extends React.Component {
                 body: formData,
                 credentials: 'include'
             });
-            alert(res.status);
 
             if (res.status == 204) {
-                console.log('DONE LOGIN');
+                this.props.history.push('/account');
             } else {
                 alert(this.props.t('common:login.errorInvalidCredentials'));
             }
+
         } catch (e) {
             alert(this.props.t('common:login.errorNetwork'));
         }
@@ -87,4 +88,4 @@ class LoginForm extends React.Component {
     }
 };
 
-export default withTranslation()(LoginForm);
+export default withTranslation()(withRouter(LoginForm));

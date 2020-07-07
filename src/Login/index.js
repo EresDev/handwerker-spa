@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import {withTranslation} from "react-i18next";
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import { withTranslation } from 'react-i18next';
 
 class Login extends React.Component {
     render() {

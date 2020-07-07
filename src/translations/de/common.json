@@ -18,5 +18,9 @@
     "heading1": "eine kostenlose Jobbörse",
     "heading2": "Handwerker in Ihrer Nähe zu finden.",
     "getStarted": "Loslegen"
+  },
+  "account": {
+    "heading": "Willkommen in Ihrem Konto.",
+    "comingSoon": "In Kürze können Sie Ihre persönlichen Daten auf dieser Seite ändern."
   }
 }

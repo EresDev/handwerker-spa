@@ -18,5 +18,9 @@
     "heading1": "a free job board",
     "heading2": "to find craftsmen in your area.",
     "getStarted": "Get Started"
+  },
+  "account": {
+    "heading": "Welcome to your account.",
+    "comingSoon": "You will be able to modify your personal information on this page soon."
   }
 }
