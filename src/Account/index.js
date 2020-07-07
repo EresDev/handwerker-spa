@@ -2,10 +2,12 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom';
+import Security from "../Util/Security";
 
 class Account extends React.Component {
     render() {
-        if (Cookies.get('Authorization')) {
+        const security = new Security();
+        if (security.isAuthenticated()) {
             return (
                 <section id="one">
                     <div className="inner">
