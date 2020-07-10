@@ -9,7 +9,7 @@ class LoginForm extends React.Component {
 				this.state = {
 						email: '',
 						password: '',
-						errors: []
+						errors: [],
 				};
 				this.handleChange = this.handleChange.bind(this);
 				this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,24 +36,24 @@ class LoginForm extends React.Component {
 						if (res.status == 204) {
 								this.props.history.push('/account');
 						} else {
-							this.setState({
-									'errors': [this.props.t('common:login.errorInvalidCredentials')]
-							});
+        this.setState({
+          errors: [this.props.t('common:login.errorInvalidCredentials')],
+        });
 						}
 
 				} catch (e) {
 						this.setState({
-								'errors': [this.props.t('common:login.errorNetwork')]
+								errors: [this.props.t('common:login.errorNetwork')],
 						});
 				}
 		}
 
 		render() {
 				return (
-						<form onSubmit={this.handleSubmit} id="login">
+						<form onSubmit={this.handleSubmit}>
 								<ul className="formErrors">
 										{this.state.errors.map((value, index) => {
-												return <li>{value}</li>
+												return <li>{value}</li>;
 										})}
 								</ul>
 								<div id="login_form">
