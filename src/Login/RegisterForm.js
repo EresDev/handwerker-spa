@@ -8,7 +8,8 @@ class RegisterForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-            confirm_password: ''
+            confirm_password: '',
+            errors: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,17 +61,26 @@ class RegisterForm extends React.Component {
             } else {
                 const resBody = await res.json();
                 if (resBody.status == 'fail') {
-                    alert(JSON.stringify(resBody.data));
+                    this.setState({
+                        errors: [JSON.stringify(resBody.data)],
+                    });
                 }
             }
         } catch (e) {
-            alert(this.props.t('common:register.errorNetwork'));
+            this.setState({
+                errors: [this.props.t('common:register.errorNetwork')],
+            });
         }
     }
 
     render() {
         return (
                 <form onSubmit={this.handleSubmit}>
+                    <ul className="formErrors">
+                        {this.state.errors.map((value, index) => {
+                            return <li>{value}</li>;
+                        })}
+                    </ul>
                     <div id="register_form">
                         <div className="field">
                             <label htmlFor="email" className="required">

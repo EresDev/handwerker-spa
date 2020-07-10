@@ -5,14 +5,14 @@
     "confirmPassword": "Confirm Password",
     "register": "Register",
     "successMessage": "Your account has been created. You can login now.",
-    "errorNetwork": "There was network error. Try again."
+    "errorNetwork": "There was a network error. Try again."
   },
   "login": {
     "email": "Email",
     "password": "Password",
     "login": "Login",
     "errorInvalidCredentials": "Login credentials are not valid. Try again.",
-    "errorNetwork": "There was network error. Try again."
+    "errorNetwork": "There was a network error. Try again."
   },
   "home": {
     "heading1": "a free job board",

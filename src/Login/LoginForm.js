@@ -36,9 +36,7 @@ class LoginForm extends React.Component {
 						if (res.status == 204) {
 								this.props.history.push('/account');
 						} else {
-        this.setState({
-          errors: [this.props.t('common:login.errorInvalidCredentials')],
-        });
+								this.setState({errors: [this.props.t('common:login.errorInvalidCredentials')],});
 						}
 
 				} catch (e) {
