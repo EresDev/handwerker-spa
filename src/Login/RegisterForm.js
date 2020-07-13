@@ -2,7 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { backendUrl } from '../globals';
 
-class RegisterForm extends React.Component {
+export class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +20,9 @@ class RegisterForm extends React.Component {
     const field = event.target;
 
     this.setState(
-        { [field.id]: field.value },
+        { [field.name]: field.value },
         () => {
-            if (field.id == 'confirm_password') {
+            if (field.name == 'confirm_password') {
               this.validatePassword(field);
             }
           }
@@ -85,7 +85,7 @@ class RegisterForm extends React.Component {
                             <label htmlFor="email" className="required">
                                 {this.props.t('common:register.email')}
                             </label>
-                            <input type="email" id="email" required="required"
+                            <input type="email" name="email" required="required"
                                value={this.state.email}
                                onChange={this.handleChange}
                         />
@@ -95,7 +95,7 @@ class RegisterForm extends React.Component {
                                className="required">
                                 {this.props.t('common:register.password')}
                             </label><input
-                        type='password' id="password"
+                        type='password' name="password"
                         required="required" minLength={6} maxLength={4096}
                         value={this.state.password}
                         onChange={this.handleChange}
@@ -105,7 +105,7 @@ class RegisterForm extends React.Component {
                                                   className="required">
                             {this.props.t('common:register.confirmPassword')}
                         </label><input
-                        type="password" id="confirm_password"
+                        type="password" name="confirm_password"
                         required="required" minLength={6}
                         maxLength={4096}
                         value={this.state.confirm_password}
