@@ -1,0 +1,91 @@
+import { unmountComponentAtNode } from 'react-dom';
+import React from 'react';
+import LoginForm from './LoginForm';
+import { BrowserRouter as  Router } from 'react-router-dom';
+import { configure, mount, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { withRouter } from 'react-router-dom';
+
+
+configure({ adapter: new Adapter() });
+
+let container = null;
+beforeEach(() => {
+  // setup a DOM element as a render target
+  /**
+   * @type {HTMLDivElement}
+   */
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+
+// test('Form is invalid when password and confirm password are not same', () => {
+// 		act(() => {
+// 				render(<LoginForm />, container);
+// 		});
+//
+// 		const matcherResult = null;
+//
+// 		try {
+// 				expect(matcherResult.pass).toBeTruthy();
+// 		} catch (e) {
+// 				throw new Error(
+// 						'Received HTML:\n' + matcherResult.receivedWithCompresssedWhitespace +
+// 						'\n\nExpected HTML:\n' + matcherResult.expectedWithCompresssedWhitespace,
+// 						e
+// 				);
+// 		}
+//
+// });
+
+test('Form is submitted', async () => {
+  // fetchMock.doMockOnce(req => {
+  //
+  //     return {
+  //       status: 404,
+  //       body: 'Not Found',
+  //     };
+  //
+  //   });
+
+
+  const wrapper = mount(
+    <Router>
+      <LoginForm  />
+    </Router>
+  );
+
+  const spyPreventDefault = jest.spyOn(wrapper.instance(), 'redirectToAccount');
+  wrapper.instance().forceUpdate();
+
+  wrapper.find('#email').getDOMNode().value = 'test@eresdev.com';
+  wrapper.find('#email').simulate('change');
+  wrapper.find('#password').getDOMNode().value = 'somepassword122';
+  wrapper.find('#password').simulate('change');
+
+  wrapper.find('form').simulate('submit');
+  //await wrapper.find('button').simulate('submit');
+
+  try {
+    expect(spyPreventDefault).toHaveBeenCalled();
+    expect(wrapper.find('form').length).toEqual(1);
+    expect(wrapper.find('#email').length).toEqual(1);
+    expect(wrapper.find('#email').getDOMNode().value).toEqual('test@eresdev.com');
+    expect(wrapper.find('#password').getDOMNode().value).toEqual('somepassword122');
+    console.log(wrapper.html());
+  } catch (e) {
+    throw Error(
+      wrapper.find('#password').instance().value + '\n' + e.toString() + '\n' +
+      (wrapper.find('#password').instance().valid ? 'true' : 'false') + '\n',
+      e
+    );
+  }
+});
