@@ -32,11 +32,7 @@ describe('<LoginForm />', () => {
   });
 
   test('redirectToAccount called on successful submit', async () => {
-    const t = (key) => key;
-    const wrapper = mount(
-      <LoginForm t={t}/>
-    );
-
+    const wrapper = loginFormWrapperFactory();
     global.fetch = jest.fn().mockImplementation(() => {
       return {
         status: 204,
@@ -57,6 +53,13 @@ describe('<LoginForm />', () => {
     delete global.fetch;
   });
 
+  const loginFormWrapperFactory = () => {
+    const translator = (key) => key;
+    return mount(
+      <LoginForm t={translator}/>
+    );
+  };
+
   const submitFormWith = async (wrapper, email, password) => {
     wrapper.find('#email').getDOMNode().value = email;
     wrapper.find('#email').simulate('change');
@@ -67,6 +70,7 @@ describe('<LoginForm />', () => {
   };
 
   const assertInputFieldsUpdate = (wrapper, email, password) => {
+    expect(wrapper.find('form').getDOMNode().checkValidity()).toEqual(true);
     expect(wrapper.find('form').length).toEqual(1);
     expect(wrapper.find('#email').length).toEqual(1);
     expect(wrapper.find('#email').getDOMNode().value).toEqual(email);
@@ -74,10 +78,7 @@ describe('<LoginForm />', () => {
   };
 
   test('Invalid credentials error on submit', async () => {
-    const t = (key) => key;
-    const wrapper = mount(
-      <LoginForm t={t}/>
-    );
+    const wrapper = loginFormWrapperFactory();
 
     global.fetch = jest.fn().mockImplementation(() => {
       return {
