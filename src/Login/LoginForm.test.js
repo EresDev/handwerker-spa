@@ -1,100 +1,102 @@
 import React from 'react';
 import { LoginForm } from './LoginForm';
-import { configure, shallow, mount } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() });
+describe('<LoginForm />', () => {
 
-const email = 'test@eresdev.com';
-const password = '9g8yr2r83';
+  configure({ adapter: new Adapter() });
 
-test('Form handleSubmit is called on submit - shallow', () => {
+  const email = 'test@eresdev.com';
+  const password = '9g8yr2r83';
 
-  const translator = (key) => key;
-  const wrapper = shallow(
-    <LoginForm t={translator}/>
-  );
-  wrapper.instance().handleSubmit = jest.fn();
-  wrapper.update();
+  test('Form handleSubmit is called on submit - shallow', () => {
+    const translator = (key) => key;
+    const wrapper = shallow(
+      <LoginForm t={translator}/>
+    );
+    wrapper.instance().handleSubmit = jest.fn();
+    wrapper.update();
 
-  const email = wrapper.find('#email');
-  expect(email.length).toEqual(1);
-  email.simulate('change', { target: { value: 'test@eresdev.com' } });
+    const email = wrapper.find('#email');
+    expect(email.length).toEqual(1);
+    email.simulate('change', { target: { value: 'test@eresdev.com' } });
 
-  const password = wrapper.find('#password');
-  expect(password.length).toEqual(1);
-  password.simulate('change', { target: { value: '9g8yr2r83' } });
+    const password = wrapper.find('#password');
+    expect(password.length).toEqual(1);
+    password.simulate('change', { target: { value: '9g8yr2r83' } });
 
-  wrapper.find('form').simulate('submit');
+    wrapper.find('form').simulate('submit');
 
-  expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
-});
-
-test('redirectToAccount called on successful submit', async () => {
-
-  const t = (key) => key;
-  const wrapper = mount(
-    <LoginForm t={t} />
-  );
-
-  global.fetch = jest.fn().mockImplementation(() => {
-    return {
-      status: 204,
-      body: '',
-    };
+    expect(wrapper.instance().handleSubmit).toHaveBeenCalled();
   });
 
-  wrapper.instance().redirectToAccount = jest.fn();
-  wrapper.update();
+  test('redirectToAccount called on successful submit', async () => {
+    const t = (key) => key;
+    const wrapper = mount(
+      <LoginForm t={t}/>
+    );
 
-  await submitFormWith(wrapper, email, password);
+    global.fetch = jest.fn().mockImplementation(() => {
+      return {
+        status: 204,
+        body: '',
+      };
+    });
 
-  assertInputFieldsUpdate(wrapper, email, password);
+    wrapper.instance().redirectToAccount = jest.fn();
+    wrapper.update();
 
-  expect(wrapper.instance().redirectToAccount).toHaveBeenCalled();
+    await submitFormWith(wrapper, email, password);
 
-  global.fetch.mockClear();
-  delete global.fetch;
-});
+    assertInputFieldsUpdate(wrapper, email, password);
 
-test('Invalid credentials error on submit', async () => {
+    expect(wrapper.instance().redirectToAccount).toHaveBeenCalled();
 
-  const t = (key) => key;
-  const wrapper = mount(
-    <LoginForm t={t} />
-  );
-
-  global.fetch = jest.fn().mockImplementation(() => {
-    return {
-      status: 401,
-      body: '',
-    };
+    global.fetch.mockClear();
+    delete global.fetch;
   });
 
-  await submitFormWith(wrapper, email, password);
+  const submitFormWith = async (wrapper, email, password) => {
+    wrapper.find('#email').getDOMNode().value = email;
+    wrapper.find('#email').simulate('change');
+    wrapper.find('#password').getDOMNode().value = password;
+    wrapper.find('#password').simulate('change');
 
-  assertInputFieldsUpdate(wrapper, email, password);
+    await wrapper.find('form').simulate('submit');
+  };
 
-  wrapper.update();
-  expect(wrapper.find('.formErrors li').length).toEqual(1);
-  expect(wrapper.find('.formErrors li').text()).toEqual('common:login.errorInvalidCredentials');
+  const assertInputFieldsUpdate = (wrapper, email, password) => {
+    expect(wrapper.find('form').length).toEqual(1);
+    expect(wrapper.find('#email').length).toEqual(1);
+    expect(wrapper.find('#email').getDOMNode().value).toEqual(email);
+    expect(wrapper.find('#password').getDOMNode().value).toEqual(password);
+  };
 
-  global.fetch.mockClear();
-  delete global.fetch;
+  test('Invalid credentials error on submit', async () => {
+    const t = (key) => key;
+    const wrapper = mount(
+      <LoginForm t={t}/>
+    );
+
+    global.fetch = jest.fn().mockImplementation(() => {
+      return {
+        status: 401,
+        body: '',
+      };
+    });
+
+    await submitFormWith(wrapper, email, password);
+
+    assertInputFieldsUpdate(wrapper, email, password);
+
+    wrapper.update();
+    expect(wrapper.find('.formErrors li').length).toEqual(1);
+    expect(wrapper.find('.formErrors li').text()).toEqual('common:login.errorInvalidCredentials');
+
+    global.fetch.mockClear();
+    delete global.fetch;
+
+  });
+
 });
-
-async function submitFormWith(wrapper, email, password) {
-  wrapper.find('#email').getDOMNode().value = email;
-  wrapper.find('#email').simulate('change');
-  wrapper.find('#password').getDOMNode().value = password;
-  wrapper.find('#password').simulate('change');
-
-  await wrapper.find('form').simulate('submit');
-}
-
-function assertInputFieldsUpdate(wrapper, email, password) {
-  expect(wrapper.find('form').length).toEqual(1);
-  expect(wrapper.find('#email').length).toEqual(1);
-  expect(wrapper.find('#email').getDOMNode().value).toEqual(email);
-  expect(wrapper.find('#password').getDOMNode().value).toEqual(password);
-}
