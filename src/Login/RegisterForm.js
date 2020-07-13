@@ -10,7 +10,6 @@ export class RegisterForm extends React.Component {
         password: '',
         confirm_password: '',
         errors: [],
-        confirmPasswordError: '',
       };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +30,7 @@ export class RegisterForm extends React.Component {
 
   validatePassword(field) {
     if (this.state.password !== this.state.confirm_password) {
-      field.setCustomValidity('Password and confirm password are not same.');
+      field.setCustomValidity(this.props.t('common:register.errorConfirmPassword'));
     } else {
       field.setCustomValidity('');
     }

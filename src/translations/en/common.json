@@ -5,7 +5,8 @@
     "confirmPassword": "Confirm Password",
     "register": "Register",
     "successMessage": "Your account has been created. You can login now.",
-    "errorNetwork": "There was a network error. Try again."
+    "errorNetwork": "There was a network error. Try again.",
+    "errorConfirmPassword": "Password and confirm password are not same."
   },
   "login": {
     "email": "Email",

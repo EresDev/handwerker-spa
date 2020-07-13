@@ -5,7 +5,8 @@
     "confirmPassword": "Kennwort bestätigen",
     "register": "Registrieren",
     "successMessage": "Ihr Konto wurde erstellt. Sie können sich jetzt anmelden.",
-    "errorNetwork": "Es ist ein Netzwerkfehler aufgetreten. Versuch es noch einmal."
+    "errorNetwork": "Es ist ein Netzwerkfehler aufgetreten. Versuch es noch einmal.",
+    "errorConfirmPassword": "Passwort und Passwort bestätigen sind nicht dasselbe."
   },
   "login": {
     "email": "Email",

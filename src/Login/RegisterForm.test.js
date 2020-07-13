@@ -19,7 +19,8 @@ describe('<RegisterForm />', () => {
       };
     });
 
-    jest.spyOn(window, 'alert').mockImplementation(() => {});
+    jest.spyOn(window, 'alert').mockImplementation(() => {
+    });
 
     fillFormFields(wrapper, email, password, password);
 
@@ -58,4 +59,21 @@ describe('<RegisterForm />', () => {
     expect(wrapper.find({ name: 'confirm_password' }).getDOMNode().value).toEqual(confirmPassword);
   };
 
+  test('error on different password and confirm password', () => {
+    const wrapper = registerFormWrapperFactory();
+
+    const differentConfirmPassword = 'other@ersedev.com';
+    fillFormFields(wrapper, email, password, differentConfirmPassword);
+
+    expect(wrapper.find('form').getDOMNode().checkValidity()).toEqual(false);
+
+    expect(
+      wrapper.find({ name: 'confirm_password' }).getDOMNode().validity.customError
+    ).toEqual(true);
+
+    expect(
+      wrapper.find({ name: 'confirm_password' }).getDOMNode().validationMessage
+    ).toEqual('common:register.errorConfirmPassword');
+
+  });
 });
