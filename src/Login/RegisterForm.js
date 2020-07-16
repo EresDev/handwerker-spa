@@ -6,11 +6,11 @@ export class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        email: '',
-        password: '',
-        confirm_password: '',
-        errors: [],
-      };
+      email: '',
+      password: '',
+      confirm_password: '',
+      errors: [],
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -19,12 +19,12 @@ export class RegisterForm extends React.Component {
     const field = event.target;
 
     this.setState(
-        { [field.name]: field.value },
-        () => {
-            if (field.name == 'confirm_password') {
-              this.validatePassword(field);
-            }
-          }
+      { [field.name]: field.value },
+      () => {
+        if (field.name == 'confirm_password') {
+          this.validatePassword(field);
+        }
+      }
     );
   }
 
@@ -45,82 +45,83 @@ export class RegisterForm extends React.Component {
 
     try {
       const res = await fetch(backendUrl + '/user', {
-          method: 'POST',
-          body: formData,
-          credentials: 'include',
-        });
+        method: 'POST',
+        body: formData,
+        credentials: 'include',
+      });
       if (res.status == 201) {
         alert(this.props.t('common:register.successMessage'));
         this.setState({
-            email: '',
-            password: '',
-            confirm_password: '',
-          });
+          email: '',
+          password: '',
+          confirm_password: '',
+        });
       } else {
         const resBody = await res.json();
         if (resBody.status == 'fail') {
           this.setState({
-              errors: [JSON.stringify(resBody.data)],
-            });
+            errors: [JSON.stringify(resBody.data)],
+          });
         }
       }
     } catch (e) {
       this.setState({
-          errors: [this.props.t('common:register.errorNetwork')],
-        });
+        errors: [this.props.t('common:register.errorNetwork')],
+      });
     }
   }
 
   render() {
+
     return (
-            <form onSubmit={this.handleSubmit}>
-                    <ul className="formErrors">
-                        {this.state.errors.map((value, index) => {
-                        return <li>{value}</li>;
-                      })}
-                    </ul>
-                    <div id="register_form">
-                        <div className="field">
-                            <label htmlFor="email" className="required">
-                                {this.props.t('common:register.email')}
-                            </label>
-                            <input type="email" name="email" required="required"
-                               value={this.state.email}
-                               onChange={this.handleChange}
-                        />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="password"
-                               className="required">
-                                {this.props.t('common:register.password')}
-                            </label><input
-                        type='password' name="password"
-                        required="required" minLength={6} maxLength={4096}
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-                        </div>
-                        <div className="field"><label htmlFor="confirm_password"
-                                                  className="required">
-                            {this.props.t('common:register.confirmPassword')}
-                        </label><input
-                        type="password" name="confirm_password"
-                        required="required" minLength={6}
-                        maxLength={4096}
-                        value={this.state.confirm_password}
-                        onChange={this.handleChange}
-                    /></div>
-                        <div>
-                            <ul className="actions">
-                                <li>
-                                    <button type="submit" className="alt">
-                                        {this.props.t('common:register.register')}
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
+      <form onSubmit={this.handleSubmit} className="register">
+        <ul className="formErrors">
+          {this.state.errors.map((value, index) => {
+            return <li key={index}>{value}</li>;
+          })}
+        </ul>
+        <div id="register_form">
+          <div className="field">
+            <label htmlFor="email" className="required">
+              {this.props.t('common:register.email')}
+            </label>
+            <input type="email" name="email" required="required"
+                   value={this.state.email}
+                   onChange={this.handleChange}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="password"
+                   className="required">
+              {this.props.t('common:register.password')}
+            </label><input
+            type='password' name="password"
+            required="required" minLength={6} maxLength={4096}
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+          </div>
+          <div className="field"><label htmlFor="confirm_password"
+                                        className="required">
+            {this.props.t('common:register.confirmPassword')}
+          </label><input
+            type="password" name="confirm_password"
+            required="required" minLength={6}
+            maxLength={4096}
+            value={this.state.confirm_password}
+            onChange={this.handleChange}
+          /></div>
+          <div>
+            <ul className="actions">
+              <li>
+                <button type="submit" className="alt">
+                  {this.props.t('common:register.register')}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
     );
   }
 }

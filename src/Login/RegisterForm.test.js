@@ -62,7 +62,7 @@ describe('<RegisterForm />', () => {
   test('error on different password and confirm password', () => {
     const wrapper = registerFormWrapperFactory();
 
-    const differentConfirmPassword = 'other@ersedev.com';
+    const differentConfirmPassword = 'someOtherPassword';
     fillFormFields(wrapper, email, password, differentConfirmPassword);
 
     expect(wrapper.find('form').getDOMNode().checkValidity()).toEqual(false);
@@ -75,5 +75,55 @@ describe('<RegisterForm />', () => {
       wrapper.find({ name: 'confirm_password' }).getDOMNode().validationMessage
     ).toEqual('common:register.errorConfirmPassword');
 
+  });
+
+  test('error from server on fetch', async () => {
+    const errors = { email: 'user is already registered.' };
+    const wrapper = registerFormWrapperFactory();
+    global.fetch = jest.fn().mockImplementation(() => {
+      return {
+        status: 422,
+        json: async () => ({ status: 'fail', data: errors }),
+      };
+    });
+
+    fillFormFields(wrapper, email, password, password);
+    assertInputFieldsUpdate(wrapper, email, password, password);
+
+    await wrapper.find('form').simulate('submit');
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    wrapper.update();
+
+    expect(wrapper.find('form.register .formErrors li').length).toEqual(1);
+    expect(wrapper.find('form.register .formErrors li').text()).toEqual(
+      JSON.stringify(errors)
+    );
+
+    global.fetch.mockClear();
+    delete global.fetch;
+  });
+
+  test('error on connect to server on fetch', async () => {
+    const wrapper = registerFormWrapperFactory();
+    global.fetch = jest.fn().mockImplementation(() => {
+      throw new Error();
+    });
+
+    fillFormFields(wrapper, email, password, password);
+    assertInputFieldsUpdate(wrapper, email, password, password);
+
+    await wrapper.find('form').simulate('submit');
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    wrapper.update();
+
+    expect(wrapper.find('form.register .formErrors li').length).toEqual(1);
+    expect(
+      wrapper.find('form.register .formErrors li').text()
+    ).toEqual('common:register.errorNetwork');
+
+    global.fetch.mockClear();
+    delete global.fetch;
   });
 });
