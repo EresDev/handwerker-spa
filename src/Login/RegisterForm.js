@@ -72,7 +72,6 @@ export class RegisterForm extends React.Component {
   }
 
   render() {
-
     return (
       <form onSubmit={this.handleSubmit} className="register">
         <ul className="formErrors">
