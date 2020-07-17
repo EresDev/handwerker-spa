@@ -59,7 +59,7 @@ export class RegisterForm extends React.Component {
       } else {
         const resBody = await res.json();
         if (resBody.status == 'fail') {
-          this.setState({
+          await this.setState({
             errors: [JSON.stringify(resBody.data)],
           });
         }

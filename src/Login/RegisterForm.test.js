@@ -83,7 +83,7 @@ describe('<RegisterForm />', () => {
     global.fetch = jest.fn().mockImplementation(() => {
       return {
         status: 422,
-        json: async () => ({ status: 'fail', data: errors }),
+        json: () => ({ status: 'fail', data: errors }),
       };
     });
 
@@ -92,8 +92,8 @@ describe('<RegisterForm />', () => {
 
     await wrapper.find('form').simulate('submit');
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    wrapper.update();
+    await wrapper.update();
+    await wrapper.setProps({}); //re-render
 
     expect(wrapper.find('form.register .formErrors li').length).toEqual(1);
     expect(wrapper.find('form.register .formErrors li').text()).toEqual(
@@ -115,8 +115,8 @@ describe('<RegisterForm />', () => {
 
     await wrapper.find('form').simulate('submit');
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    wrapper.update();
+    await wrapper.update();
+    await wrapper.setProps({}); //re-render
 
     expect(wrapper.find('form.register .formErrors li').length).toEqual(1);
     expect(
