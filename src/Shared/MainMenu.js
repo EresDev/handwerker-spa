@@ -9,7 +9,7 @@ export class MainMenu extends React.Component {
     super(props);
     this.switchLocale = this.switchLocale.bind(this);
     this.logout = this.logout.bind(this);
-    const locale = localStorage.getItem('locale');
+    const locale = localStorage.getItem('locale') || 'en';
     this.state = {
         locale: locale,
       };
